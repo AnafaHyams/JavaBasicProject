@@ -1,7 +1,7 @@
-package com.epam.producer.services;
+package com.epam.consumer.services;
 
-import com.epam.common.model.Quote;
 import com.epam.common.services.DirectoryPathGeneratorImpl;
+import com.epam.producer.services.InjectValue;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -10,26 +10,23 @@ import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author Evgeny Borisov
- */
+public class JsonSaverImpl implements JsonSaver {
 
-public class QuoterSaverImpl implements QuoterSaver {
-
-    @InjectValue("producer_output_location")
+    @InjectValue("consumer_output_location")
     private String locationDir;
 
-    public QuoterSaverImpl() {
+    public JsonSaverImpl() {
     }
+
 
     @SneakyThrows
     @Override
-    public void save(Quote quote) {
+    public void save(String jsonAsString) {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
         DirectoryPathGeneratorImpl.createDirectoryPath(locationDir);
         File file = new File(locationDir + "quote_" + timeStamp);
         file.createNewFile();
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-        oos.writeObject(quote);
+        oos.writeObject(jsonAsString);
     }
 }
