@@ -1,6 +1,8 @@
 package com.epam.producer.services;
 
 import com.epam.common.model.Quote;
+import com.epam.infra.Singleton;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -12,15 +14,20 @@ import java.util.Date;
 /**
  * @author Evgeny Borisov
  */
+
 public class QuoterSaverImpl implements QuoterSaver {
 
     @InjectValue("producer_output_location")
     private String locationDir;
 
+    public QuoterSaverImpl() {
+    }
+
     @SneakyThrows
     @Override
     public void save(Quote quote) {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        DirectoryPathGeneratorImpl.createDirectoryPath(locationDir);
         File file = new File(locationDir + "quote_" + timeStamp);
         file.createNewFile();
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
