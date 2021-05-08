@@ -1,6 +1,7 @@
 package com.epam.consumer.services;
 
 import com.epam.common.services.DirectoryPathGeneratorImpl;
+import com.epam.common.services.ObjectSaver;
 import com.epam.producer.services.InjectValue;
 import lombok.SneakyThrows;
 
@@ -21,12 +22,13 @@ public class JsonSaverImpl implements JsonSaver {
 
     @SneakyThrows
     @Override
-    public void save(String jsonAsString) {
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-        DirectoryPathGeneratorImpl.createDirectoryPath(locationDir);
-        File file = new File(locationDir + "quote_" + timeStamp);
-        file.createNewFile();
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-        oos.writeObject(jsonAsString);
+    public void save(String jsonAsString, ObjectSaver objectSaver) {
+        objectSaver.save(jsonAsString, locationDir);
+//        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+//        DirectoryPathGeneratorImpl.createDirectoryPath(locationDir);
+//        File file = new File(locationDir + "quote_" + timeStamp);
+//        file.createNewFile();
+//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+//        oos.writeObject(jsonAsString);
     }
 }

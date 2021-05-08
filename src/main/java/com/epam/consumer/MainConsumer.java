@@ -1,11 +1,15 @@
 package com.epam.consumer;
 
 import com.epam.common.model.Quote;
+import com.epam.common.services.ObjectSaver;
+import com.epam.common.services.ObjectSaverImpl;
 import com.epam.consumer.flow.QuoterConsumerFlowManager;
 import com.epam.consumer.services.QuoterReader;
 import com.epam.consumer.services.QuoterReaderImpl;
 import com.epam.infra.ApplicationContext;
 import com.epam.infra.JavaConfig;
+import com.epam.producer.services.QuoterSaver;
+import com.epam.producer.services.QuoterSaverImpl;
 import lombok.SneakyThrows;
 
 import java.util.List;
@@ -17,6 +21,7 @@ public class MainConsumer {
         ApplicationContext context = new ApplicationContext(JavaConfig.builder().packagesToScan("com.epam").build());
         QuoterConsumerFlowManager flowManager = context.getObject(QuoterConsumerFlowManager.class);
         QuoterReader quoterReader = context.getObject(QuoterReaderImpl.class);
+
         /*
         while(true) {
             flowManager.saveQuoteAsJson();

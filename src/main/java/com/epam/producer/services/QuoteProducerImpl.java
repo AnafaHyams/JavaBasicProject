@@ -2,6 +2,7 @@ package com.epam.producer.services;
 
 import com.epam.common.model.Quote;
 import com.epam.common.model.QuoteStatus;
+import com.epam.common.services.IdGenerator;
 import com.epam.infra.Singleton;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +17,6 @@ public class QuoteProducerImpl implements QuoteProducer {
 
     @Override
     public Quote generate() {
-
 
         String quoteText = quoterService.getRandomQuoteText();
         Quote quote = Quote.builder()

@@ -2,7 +2,7 @@ package com.epam.producer;
 
 import com.epam.common.model.Quote;
 import com.epam.common.model.QuoteStatus;
-import com.epam.producer.services.IdGenerator;
+import com.epam.common.services.IdGenerator;
 import com.epam.producer.services.QuoteProducer;
 import com.epam.producer.services.QuoteProducerImpl;
 import com.epam.producer.services.QuoterService;
