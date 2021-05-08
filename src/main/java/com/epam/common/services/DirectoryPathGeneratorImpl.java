@@ -1,7 +1,5 @@
 package com.epam.common.services;
 
-import com.epam.common.services.DirectoryPathGenerator;
-
 import java.io.File;
 
 public class DirectoryPathGeneratorImpl implements DirectoryPathGenerator {
